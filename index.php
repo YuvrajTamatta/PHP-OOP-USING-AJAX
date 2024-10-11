@@ -47,7 +47,7 @@
                 <h4 class="text-primary ">All users in database</h4>
             </div>
             <div class="col-lg-6">
-                <button class="btn btn-primary m-1 float-right"><i class="fa-solid fa-user-plus"></i>&nbsp;&nbsp;Add new user</button>
+                <button class="btn btn-primary m-1 float-right" data-toggle="modal" data-target="#addModal"><i class="fa-solid fa-user-plus"></i>&nbsp;&nbsp;Add new user</button>
                 <a href="" class="btn btn-success m-1 float-right"> <i class="fas fa-table fa-lg"></i>&nbsp;Export to excel</a>
             </div>
         </div>
@@ -68,18 +68,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center text-secondary">
-                                <td>1</td>
-                                <td>john</td>
-                                <td>doe</td>
-                                <td>john@gmail.com</td>
-                                <td>659874321</td>
-                                <td>
-                                    <a href="" title="View Details" class="text-success"><i class="fas fa-info-circle fa-lg"></i></a>&nbsp;&nbsp;
-                                    <a href="" title="Edit" class="text-primary"><i class="fas fa-edit fa-lg"></i></a>&nbsp;&nbsp;
-                                    <a href="" title="Delete" class="text-danger"><i class="fas fa-trash-alt fa-lg"></i></a>&nbsp;&nbsp;
-                                </td>
-                            </tr>
+                            <?php for ($i = 1; $i <= 100; $i++): ?>
+                                <tr class="text-center text-secondary">
+                                    <td><?= $i ?></td>
+                                    <td>john <?= $i ?></td>
+                                    <td>doe <?= $i ?></td>
+                                    <td>john@gmail.com <?= $i ?></td>
+                                    <td>659874321 <?= $i ?></td>
+                                    <td>
+                                        <a href="" title="View Details" class="text-success"><i class="fas fa-info-circle fa-lg"></i></a>&nbsp;&nbsp;
+                                        <a href="" title="Edit" class="text-primary"><i class="fas fa-edit fa-lg"></i></a>&nbsp;&nbsp;
+                                        <a href="" title="Delete" class="text-danger"><i class="fas fa-trash-alt fa-lg"></i></a>&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            <?php endfor; ?>
                         </tbody>
 
                     </table>
@@ -87,6 +89,40 @@
             </div>
         </div>
     </div>
+
+    <!-- Model for add user -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add New User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" id="form-data">
+            <div class="form-group">
+                <input type="text" name="fname" class="form-control" placeholder="First name" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="lname" class="form-control" placeholder="Last name" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="email" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" name="phone" class="form-control" placeholder="Phone" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="insert" id="insert" value="Add User" class="btn btn-info btn-block">
+            </div>
+        </form>
+      </div>      
+    </div>
+  </div>
+</div>
+
 
 
 
@@ -101,6 +137,12 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/v/dt/dt-2.1.8/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(function(){
+            $("table").DataTable()
+        })
+    </script>
 
 
 </body>
