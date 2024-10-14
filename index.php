@@ -56,35 +56,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-responsive" id="showUser">
-                    <table class="table table-striped table-sm table-bordered">
-                        <thead>
-                            <tr class="text-center">
-                                <th>ID</th>
-                                <th>FIRST_NAME</th>
-                                <th>LAST_NAME</th>
-                                <th>E-MAIL</th>
-                                <th>PHONE</th>
-                                <th>ACTIONS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php for ($i = 1; $i <= 100; $i++): ?>
-                                <tr class="text-center text-secondary">
-                                    <td><?= $i ?></td>
-                                    <td>john <?= $i ?></td>
-                                    <td>doe <?= $i ?></td>
-                                    <td>john@gmail.com <?= $i ?></td>
-                                    <td>659874321 <?= $i ?></td>
-                                    <td>
-                                        <a href="" title="View Details" class="text-success"><i class="fas fa-info-circle fa-lg"></i></a>&nbsp;&nbsp;
-                                        <a href="" title="Edit" class="text-primary"><i class="fas fa-edit fa-lg"></i></a>&nbsp;&nbsp;
-                                        <a href="" title="Delete" class="text-danger"><i class="fas fa-trash-alt fa-lg"></i></a>&nbsp;&nbsp;
-                                    </td>
-                                </tr>
-                            <?php endfor; ?>
-                        </tbody>
-
-                    </table>
+                   
+                            
                 </div>
             </div>
         </div>
@@ -130,6 +103,7 @@
 
     <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Popper JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
@@ -140,7 +114,30 @@
 
     <script>
         $(function(){
-            $("table").DataTable()
+            // Display data in Data-Table
+            showAllUsers()            
+            function showAllUsers(){
+                $.ajax({
+                    url:"action.php",
+                    type:"post",
+                    data:{action:'view'},
+                    success:function(response){
+                        //console.log(response);
+                        $('#showUser').html(response)
+                        $("table").DataTable({
+                            order:[0,'desc']
+                        })
+                        
+                    }
+                })
+            }
+
+            // Insert Data ajax
+            $('body').on('click','#insert',function(e){
+                e.preventDefault()
+                let data = $('#form-data').serialize()
+            })
+
         })
     </script>
 
